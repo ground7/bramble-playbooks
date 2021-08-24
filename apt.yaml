@@ -1,10 +1,19 @@
 ---
-- hosts: debian
+- hosts: bramble
   become: yes
   become_method: sudo
+  serial: 1
   tasks:
-    - name: "Update Repository cache"
+    - name: "Update Repository Cache"
       apt:
         update_cache: true
         cache_valid_time: 3600
         force_apt_get: true
+    - name: "Upgrade Repository Cache"
+      apt:
+        upgrade: yes
+        cache_valid_time: 3600
+        force_apt_get: true
+    - name: "Reboot Berry"
+      reboot:
+        reboot_timeout: 3600
