@@ -1,0 +1,13 @@
+---
+- hosts: bramble_agents
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: "Uninstall k3s from agents"
+      command: /usr/local/bin/k3s-agent-uninstall.sh
+- hosts: bramble_servers
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: "Uninstall k3s from servers"
+      command: /usr/local/bin/k3s-uninstall.sh
